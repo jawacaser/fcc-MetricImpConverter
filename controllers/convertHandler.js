@@ -15,10 +15,11 @@ function ConvertHandler() {
   };
   
   this.getUnit = function(input) {
-    let units = ['gal', 'L', 'lbs', 'kg', 'mi', 'km']
+    let inp = input.toLowerCase()
+    let units = ['gal', 'l', 'lbs', 'kg', 'mi', 'km']
     for (let i = 0; i < units.length; i++) {
-      if (input === units[i]) {
-        return units[i]
+      if (inp === units[i]) {
+        return units[i] === 'l' ? "L" : units[i]
       }
     }
     throw new Error('invalid unit')
@@ -46,17 +47,17 @@ function ConvertHandler() {
     const miToKm = 1.60934;
     
     if (initUnit === 'gal') {
-      return (initNum * galToL).toFixed(5)
+      return parseFloat((initNum * galToL).toFixed(5))
     } else if (initUnit === 'L') {
-      return (initNum / galToL).toFixed(5)
+      return parseFloat((initNum / galToL).toFixed(5))
     } else if (initUnit === 'lbs') {
-      return (initNum * lbsToKg).toFixed(5)
+      return parseFloat((initNum * lbsToKg).toFixed(5))
     } else if (initUnit === 'kg') {
-      return (initNum / lbsToKg).toFixed(5)
+      return parseFloat((initNum / lbsToKg).toFixed(5))
     } else if (initUnit === 'mi') {
-      return (initNum * miToKm).toFixed(5)
+      return parseFloat((initNum * miToKm).toFixed(5))
     } else {
-      return (initNum / miToKm).toFixed(5)
+      return parseFloat((initNum / miToKm).toFixed(5))
     }
   };
   

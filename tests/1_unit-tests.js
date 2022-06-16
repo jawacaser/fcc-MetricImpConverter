@@ -1,13 +1,13 @@
 const chai = require('chai');
 let assert = chai.assert;
-let should = chai.should;
 const ConvertHandler = require('../controllers/convertHandler.js');
 
 let convertHandler = new ConvertHandler();
 
 suite('Unit Tests', function(){
-    test('correctly read a whole number input', ()=> {
+    test('correctly read a whole number input', function (done) {
         assert.equal(convertHandler.getNum('5'), 5)
+        done();
     });
     test('correctly read a decimal number input', ()=> {
         assert.equal(convertHandler.getNum('3.22'), 3.22)
@@ -26,11 +26,11 @@ suite('Unit Tests', function(){
     });
     test('correctly read each valid input unit', ()=> {
         assert.equal(convertHandler.getUnit('gal'), 'gal')
-        assert.equal(convertHandler.getUnit('L'), 'L')
+        assert.equal(convertHandler.getUnit('l'), 'L')
         assert.equal(convertHandler.getUnit('lbs'), 'lbs')
-        assert.equal(convertHandler.getUnit('kg'), 'kg')
+        assert.equal(convertHandler.getUnit('KG'), 'kg')
         assert.equal(convertHandler.getUnit('mi'), 'mi')
-        assert.equal(convertHandler.getUnit('km'), 'km')
+        assert.equal(convertHandler.getUnit('kM'), 'km')
     });
     test('correctly return an error for an invalid input unit', ()=> {
         assert.throws(() => convertHandler.getUnit('1.21jigawatts'))

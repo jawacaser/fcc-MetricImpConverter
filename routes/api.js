@@ -16,15 +16,12 @@ module.exports = function (app) {
     let unit = reqArrayUnit[reqArrayUnit.length-1]
     // console.log('number '+reqArrayNum)
     // console.log('unit '+reqArrayUnit[reqArrayUnit.length-1])
-    let parseUnit;
-    unit === 'l' || unit === 'L' ? parseUnit = unit.toUpperCase() : parseUnit = unit.toLowerCase()
-    // console.log('parse '+parseUnit)
 
     try {
       convertHandler.getNum(reqArrayNum[0])
     } catch (error) {
       try {
-        convertHandler.getUnit(parseUnit)
+        convertHandler.getUnit(unit)
       } catch (error) {
         return res.json("invalid number and unit")
       }
@@ -32,7 +29,7 @@ module.exports = function (app) {
     }
 
     let initNum = convertHandler.getNum(reqArrayNum[0])
-    let initUnit = convertHandler.getUnit(parseUnit)
+    let initUnit = convertHandler.getUnit(unit)
     let returnUnit = convertHandler.getReturnUnit(initUnit)
     let returnNum = convertHandler.convert(initNum, initUnit)
     let initUnitString = convertHandler.spellOutUnit(initUnit)
